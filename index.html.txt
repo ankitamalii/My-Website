@@ -1,0 +1,1315 @@
+```
+<MyWebsite>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Dimension | Next-Gen Visual Experiences</title>
+    <meta name="description" content="Professional 3D artist and designer creating stunning visual experiences for brands and businesses.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --accent: #10b981;
+            --max-width: 1400px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--light);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        section {
+            position: relative;
+            padding: 8rem 2rem;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--dark);
+            color: white;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            z-index: 100;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--dark);
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            height: 80%;
+            perspective: 1000px;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            transform: rotateY(15deg) rotateX(5deg);
+        }
+
+        .hero-image-container:hover {
+            transform: rotateY(5deg) rotateX(0deg);
+        }
+
+        .hero-image-main {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            transform: translateZ(40px);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-image-secondary {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background-color: var(--primary-light);
+            border-radius: 20px;
+            filter: blur(20px);
+            opacity: 0.5;
+            transform: translateZ(0);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) translateZ(-20px);
+        }
+
+        /* About Section */
+        #about {
+            background-color: white;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+            min-height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .about-image img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateZ(20px);
+        }
+
+        .about-image-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            transform: translateZ(0) translate(30px, 30px);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .section-title {
+            color: var(--dark);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .skills {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill {
+            background-color: var(--gray-light);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Portfolio Section */
+        #portfolio {
+            background-color: var(--light);
+            overflow: hidden;
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .portfolio-filter button {
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-filter button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .portfolio-filter button:hover {
+            background-color: var(--gray-light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            aspect-ratio: 4/3;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) translateZ(20px);
+        }
+
+        .portfolio-item-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .portfolio-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-item-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .portfolio-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .portfolio-item-category {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        #services {
+            background-color: white;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: var(--primary-light);
+        }
+
+        .service-link svg {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-link:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background-color: var(--light);
+        }
+
+        .testimonials-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background-color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: rotateY(5deg);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial:hover {
+            transform: rotateY(0deg);
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .testimonial-author-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: white;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: var(--gray);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.5rem 1rem 0.5rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: 0.5rem;
+            left: 0.8rem;
+            font-size: 0.7rem;
+            color: var(--primary);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .contact-info-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-info-content p {
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* 3D Effect Elements */
+        .parallax-element {
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-image {
+                position: relative;
+                width: 100%;
+                max-width: 100%;
+                height: 400px;
+                margin-top: 2rem;
+                transform: none;
+                right: auto;
+                top: auto;
+            }
+
+            .hero-image-container {
+                transform: none !important;
+            }
+
+            .hero-container {
+                flex-direction: column;
+                padding-top: 6rem;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+
+            .about-image {
+                min-height: 400px;
+                width: 100%;
+                order: -1;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: white;
+                z-index: 90;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(-100%);
+                transition: transform 0.5s ease;
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 6rem 1.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-container container">
+            <a href="#" class="logo">3D<span>Dimension</span></a>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="hero-container container">
+            <div class="hero-content">
+                <h1>Pushing Boundaries in 3D Visual Storytelling</h1>
+                <p>Expert 3D artist specializing in cinematic visuals, interactive experiences, and cutting-edge digital art. Let's create something extraordinary together.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                    <a href="#portfolio" class="btn btn-secondary">View Work</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <div class="hero-image-main">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/887fcf41-791e-46db-aa2c-990d25cb9be8.png" alt="Cinematic 3D scene with volumetric lighting and photorealistic textures" />
+                    </div>
+                    <div class="hero-image-secondary"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-container container">
+            <div class="about-content">
+                <h2 class="section-title">About Me</h2>
+                <p>With over 8 years of experience in 3D design and visualization, I specialize in creating stunning digital environments and assets for brands, architects, and marketing teams.</p>
+                <p>My approach combines artistic vision with technical precision to produce work that's not only beautiful but also strategically aligned with your business objectives.</p>
+                <p>I've had the privilege of working with clients ranging from startups to Fortune 500 companies, helping them communicate complex ideas through compelling 3D visuals.</p>
+                <div class="skills">
+                    <div class="skill">3D Modeling</div>
+                    <div class="skill">Animation</div>
+                    <div class="skill">Visualization</div>
+                    <div class="skill">Texturing</div>
+                    <div class="skill">Lighting</div>
+                    <div class="skill">Rendering</div>
+                </div>
+            </div>
+            <div class="about-image">
+                <div class="about-image-decoration"></div>
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/947a2a88-4eee-4e25-9937-c6a73858a157.png" alt="Artist working in futuristic studio with holographic 3D interfaces" />
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="portfolio-header">
+                <h2 class="section-title">Featured Work</h2>
+                <div class="portfolio-filter">
+                    <button class="active">All</button>
+                    <button>Architecture</button>
+                    <button>Product</button>
+                    <button>Animation</button>
+                </div>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-item-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/61e6bed0-d849-43eb-b83b-1ea1e9a917f6.png" alt="Futuristic smart home exterior with solar panels and glass walls in a forest setting" />
+                        <div class="portfolio-item-overlay">
+                            <h3>EcoSmart Residence</h3>
+                            <p class="portfolio-item-category">Architectural Visualization</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/34cf2191-7f52-4c78-b34e-bbbb1b7d019e.png" alt="High-tech electric vehicle with detailed interior showing dashboard and seating" />
+                        <div class="portfolio-item-overlay">
+                            <h3>Nexus EV Concept</h3>
+                            <p class="portfolio-item-category">Product Design</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/95efb5f9-0b90-4ea1-8c99-5202aef68572.png" alt="3D animated character of a futuristic warrior with intricate armor details" />
+                        <div class="portfolio-item-overlay">
+                            <h3>Cyber Sentinel</h3>
+                            <p class="portfolio-item-category">Character Design</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/20af9845-3a30-44ed-89fb-b52b50a902e5.png" alt="Hyper-realistic 3D rendering of a luxury watch with golden accents and leather strap" />
+                        <div class="portfolio-item-overlay">
+                            <h3>Chronos Series</h3>
+                            <p class="portfolio-item-category">Product Visualization</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f95bed99-1259-45d3-97e5-6021981f43bd.png" alt="3D architectural model of a contemporary museum with angular design and water features" />
+                        <div class="portfolio-item-overlay">
+                            <h3>MOMA Modern Wing</h3>
+                            <p class="portfolio-item-category">Architectural Visualization</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4562cb65-3aec-4e6c-9f69-416d4d640c67.png" alt="3D animation sequence of a transforming robotic arm assembling electronics" />
+                        <div class="portfolio-item-overlay">
+                            <h3>Automation Sequence</h3>
+                            <p class="portfolio-item-category">Animation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">My Services</h2>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        📐
+                    </div>
+                    <h3>3D Modeling</h3>
+                    <p>High-precision 3D models for products, architecture, and characters with perfect topology and optimized for any application.</p>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        🎬
+                    </div>
+                    <h3>Animation</h3>
+                    <p>Bringing your 3D models to life with realistic or stylized animations that engage and communicate effectively.</p>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        🖼️
+                    </div>
+                    <h3>Visualization</h3>
+                    <p>Photorealistic or stylized renders that showcase your product or space in the best possible light.</p>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="testimonials-container container">
+            <h2 class="section-title" style="text-align: center;">Client Testimonials</h2>
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"Working with 3DArtistry transformed our product launch. The visualizations they created helped us secure investment and pre-orders before manufacturing even began. Their attention to detail and creative problem-solving was invaluable."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d0c473dc-f5c4-4f5a-8ef7-abab21fa630a.png" alt="Portrait of a smiling female business executive in a professional blazer" />
+                        </div>
+                        <div class="testimonial-author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechForward Inc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"The 3D walkthrough of our development project helped stakeholders visualize the space in ways blueprints never could. The level of realism and ability to make last-minute changes saved us time and money in the approval process."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/46a27b7c-fb1b-4b47-b7d1-6abd969cf171.png" alt="Portrait of a male architect with glasses reviewing blueprints" />
+                        </div>
+                        <div class="testimonial-author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Principal Architect, Vertex Designs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container container">
+            <div class="contact-info">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p>Have a project in mind or want to learn more about my online classes? Get in touch and let's discuss how we can bring your vision to life.</p>
+                
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        ✉️
+                    </div>
+                    <div class="contact-info-content">
+                        <h4>Email</h4>
+                        <p>contact@3dartistry.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        📱
+                    </div>
+                    <div class="contact-info-content">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        📍
+                    </div>
+                    <div class="contact-info-content">
+                        <h4>Location</h4>
+                        <p>San Francisco, CA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="form">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder=" " required>
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder=" " required>
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder=" " required></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container container">
+            <div class="footer-col">
+                <h3>3DArtistry</h3>
+                <p>Creating immersive 3D experiences that inspire, engage, and transform.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="LinkedIn">🔗</a>
+                    <a href="#" aria-label="Dribbble">🏀</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">3D Modeling</a></li>
+                    <li><a href="#">Animation</a></li>
+                    <li><a href="#">Visualization</a></li>
+                    <li><a href="#">Online Courses</a></li>
+                    <li><a href="#">Consulting</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new tutorials and special offers.</p>
+                <form class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 3DArtistry. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('nav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                nav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '☰';
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animation
+        gsap.from('.hero-content h1', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.3
+        });
+
+        gsap.from('.hero-content p', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.6
+        });
+
+        gsap.from('.hero-buttons', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.9
+        });
+
+        gsap.from('.hero-image-container', {
+            opacity: 0,
+            x: 100,
+            duration: 1,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+
+        // About Section Animation
+        gsap.from('.about-image', {
+            scrollTrigger: {
+                trigger: '.about-image',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.about-content', {
+            scrollTrigger: {
+                trigger: '.about-content',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        // Portfolio Items Animation
+        gsap.utils.toArray('.portfolio-item').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Contact Form Animation
+        gsap.from('.contact-form', {
+            scrollTrigger: {
+                trigger: '.contact-form',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        // Contact Info Animation
+        gsap.from('.contact-info', {
+            scrollTrigger: {
+                trigger: '.contact-info',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        // Form Submission
+        const form = document.getElementById('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
+```
